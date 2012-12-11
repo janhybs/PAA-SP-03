@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel='stylesheet' media='screen and (max-width: 1000px)' href='css/mobile.css' />
+        <link rel='stylesheet' media='screen and (min-width: 1001px)' href='css/tablet.css' />
+
+        <script src="js/Chibi.js" type="text/javascript"></script>
+        <script src="js/Drawing.js" type="text/javascript"></script>
+        <script src="js/Database.js" type="text/javascript"></script>
+        <script src="js/Main.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $ (document).ready (function () {
+                Drawing.init ();
+                Main.init ();
+
+                Capabilities.fix ('import');
+                Capabilities.fix ('export');
+                Capabilities.fix ('drawing');
+                Capabilities.fix ('database');
+                if (!Capabilities.isSupported ('database')) {
+                    $ (document.body).html ('<div class="warning">Your device is not fully supported</div>');
+                    if (!!~navigator.userAgent.toString ().indexOf ('MSIE'))
+                        $ (document.body).html ('<h2>Nothing personal IE...<h2>', 'after');
+                    $ ('#content').hide ();
+                    return;
+                }
+                
+                $ ('#content').show ();
+            });
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <div class="warning">No JS, no app</div>
+        </noscript>
+
+        <div id="content" style="display: none;">
+            <div id="topBarBlock">
+                <h1 id="logo">Todo list</h1>
+                <button id="export" onclick="Main.export ();" data-require="export">export</button>
+                <button id="import" onclick="Main.import ();" data-require="import">import</button>
+                <button id="addTask" onclick="Main.showNewTaskForm ();">+Task</button>
+                <button id="addGroup" onclick="Main.showNewGroupForm ();">+Group</button>
+            </div>
+
+            <div id="groupListBlock">
+                <button id="prevGroupBtn" onclick="Main.prevGroup ();">&lt;</button>
+                <ul id="groupList">
+                </ul>
+                <button id="nextGroupBtn" onclick="Main.nextGroup ();">&gt;</button>
+            </div>
+
+
+            <div id="taskListBlock">
+                <ul id="taskList">
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div id="newTaskForm" class="popup" style="display: none;">
+            <form>
+                <h2>New Task</h2>
+                <label for="taskTitleNew">Title: </label>
+                <input id="taskTitleNew" type="text" name="title" value="" placeholder="title" />
+                <br />
+
+                <label for="taskDescriptionNew">Description: </label>
+                <textarea id="taskDescriptionNew"></textarea>
+                <br />
+
+                <label for="taskStateNew">Title: </label>
+                <select id="taskStateNew" name="state">
+                    <option value="1">complete</option>
+                    <option value="-1" selected="selected">incomplete</option>
+                </select>
+                <br />
+
+                <label for="groupIDNew">Group: </label>
+                <select id="groupIDNew" name="group">
+                </select>
+                <br />
+
+
+                <label>Image: </label>
+                <div class="select" data-require="canvas">
+                    <img id="imageNew" style="display: none"  src="" />
+                    <button id="imageDrawNew">Draw one</button>
+                    <button id="imageClearNew" style="display: none">Delete it</button>
+                </div>
+                <div class="warning" data-require="drawing-placeholder">Your device does not fully support canvas feature</div>
+                <br />
+
+                <div class="form-btns">
+                    <input class="btn" type="button" value="Cancel" name="cancel" onclick="Main.hideNewTaskForm ();" />
+                    <input class="btn" type="button" value="Create" name="create" onclick="Main.addNewTaskFromForm ();" />
+                </div>
+            </form>
+        </div>
+
+        <div id="newGroupForm" class="popup" style="display: none;">
+            <form>
+                <h2>New Group</h2>
+                <label for="groupTitleNew">Title: </label>
+                <input id="groupTitleNew" type="text" name="title" value="" placeholder="title" />
+                <br />
+
+                <label for="taskDescriptionNew">Description: </label>
+                <textarea id="groupDescriptionNew"></textarea>
+                <br />
+
+                <div class="form-btns">
+                    <input class="btn" type="button" value="Cancel" name="cancel" onclick="Main.hideNewGroupForm ();" />
+                    <input class="btn" type="button" value="Create" name="create" onclick="Main.addNewGroupFromForm ();" />
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div id="editTaskForm" class="popup" style="display: none;">
+            <form>
+                <h2>Edit Task</h2>
+                <label for="taskTitleEdit">Title: </label>
+                <input id="taskTitleEdit" type="text" name="title" value="" placeholder="title" />
+                <br />
+
+                <label for="taskDescriptionEdit">Description: </label>
+                <textarea id="taskDescriptionEdit"></textarea>
+                <br />
+
+                <label for="taskStateEdit">Title: </label>
+                <select id="taskStateEdit" name="state">
+                    <option id="taskStateEdit1" value="1">complete</option>
+                    <option id="taskStateEdit-1" value="-1">incomplete</option>
+                </select>
+                <br />
+
+                <label for="groupIDEdit">Group: </label>
+                <select id="groupIDEdit" name="ovoce">
+                </select>
+                <br />
+
+
+                <label>Image: </label>
+                <div class="select" data-require="drawing">
+                    <img id="imageEdit" style="display: none"  src="" />
+                    <button id="imageDrawEdit">Draw one</button>
+                    <button id="imageClearEdit" style="display: none">Delete it</button>
+                </div>
+                <div class="warning" data-require="drawing-placeholder">Your device does not fully support canvas feature</div>
+                <br />
+
+                <div class="form-btns">
+                    <input type="hidden" id="editTaskID" name="editTaskID" value="" />
+                    <input class="btn" type="button" value="Delete" name="cancel" onclick="Main.deleteTask ();" />
+                    <input class="btn" type="button" value="Cancel" name="cancel" onclick="Main.hideEditTaskForm ();" />
+                    <input class="btn" type="button" value="Edit" name="create" onclick="Main.editTaskFromForm ();" />
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+
+        <div id="editGroupForm" class="popup" style="display: none;">
+            <form>
+                <h2>Edit Group</h2>
+                <label for="groupTitleEdit">Title: </label>
+                <input id="groupTitleEdit" type="text" name="title" value="" placeholder="title" />
+                <br />
+
+                <label for="groupDescriptionEdit">Description: </label>
+                <textarea id="groupDescriptionEdit"></textarea>
+                <br />
+
+                <div class="form-btns">
+                    <input type="hidden" id="editGroupID" name="editGroupID" value="" />
+                    <input class="btn" type="button" value="Delete" name="cancel" onclick="Main.deleteGroup ();" />
+                    <input class="btn" type="button" value="Cancel" name="cancel" onclick="Main.hideEditGroupForm ();" />
+                    <input class="btn" type="button" value="Edit" name="create" onclick="Main.editGroupFromForm ();" />
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div id="Drawing" style="display: none;">
+            <div class="top">
+                <ul>
+                    <li style="background: black" class="selected">black</li>
+                    <li style="background: white">white</li>
+                    <li style="background: red">red</li>
+                    <li style="background: yellow">yellow</li>
+                    <li style="background: blue">blue</li>
+                    <li style="background: green">green</li>
+                    <li style="background: orange">orange</li>
+                    <li style="background: yellowgreen">yellowgreen</li>
+                    <li><button>Fill</button></li>
+                </ul>
+            </div>
+            <div class="canvas">
+                <canvas id="drawCanvas" width="320" height="240" >Canvas not supported</canvas>
+            </div>
+            <div class="strokeOptions">
+                <button id="strokeInc">+</button>
+                <h3 id="strokeWidth">5</h3>
+                <button id="strokeDec">-</button>
+            </div>
+            <div class="controls">
+                <button onclick="Main.hideDrawing (true);">Attach</button>
+                <button onclick="Main.hideDrawing (false);">Cancel</button>
+            </div>
+        </div>
+
+        <footer class="clear"></footer>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+/* 
+    Document   : main
+    Created on : 23.10.2012, 18:18:30
+    Author     : Hans
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, header, footer, article { 
+    margin: 0;
+    padding: 0;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+summary:before {
+    content: '+ ';
+}
+
+details[open] summary:before {
+    content: '- ';
+}
+
+section header > * {
+    float: left;
+}
+section header h2 {
+    line-height: 48px;
+    height: 48px;
+}
+
+.icon48 {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+}
+
+section, article, footer, article li {
+    clear: both;
+}
+li {
+    list-style: none;
+}
+
+.sizing {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.plus { background: transparent url('../images/plus.png') 8px 8px no-repeat;}
+.delete { background: transparent url('../images/delete.png') 8px 8px no-repeat;}
+.minus { background: transparent url('../images/minus.png') 8px 8px no-repeat;}
+.edit { background: transparent url('../images/edit.png') 8px 8px no-repeat;}
+.checked { background: transparent url('../images/checked.png') 8px 8px no-repeat;}
+.unchecked { background: transparent url('../images/unchecked.png') 8px 8px no-repeat;}
+.fl {float: left;}
+.fr {float: right;}
+
+article h3 { line-height: 48px; }
+article p  { font-size: 0.7em;}
+article li {
+    display: table;
+}
+article .task-main {
+    display: table-row;
+}
+article .task-back {
+    width: 100px;
+    display: table-cell;
+    clear: both;
+    vertical-align: middle;
+    text-align: center;
+}
+
+article .task-head {
+    width: 100px;
+    display: table-cell;
+    clear: both;
+    vertical-align: middle;
+    text-align: center;
+}
+article .task-info {
+    display: table-cell;
+    clear: both;
+    vertical-align: middle;
+}
+
+article .task-head > *, article .task-back > * {
+    float: left;
+}

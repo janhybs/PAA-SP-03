@@ -1,0 +1,231 @@
+/* TOP BAR BLOCK
+   ================================================== */
+
+#topBarBlock {  margin-bottom: 10px }
+
+ #topBarBlock > * {  display: inline }
+
+ #topBarBlock button {  float: right }
+
+/* GROUP BLOCK
+   ================================================== */
+
+#groupListBlock #prevGroupBtn, #groupListBlock #nextGroupBtn {
+  visibility: hidden;
+  display: none;
+}
+
+#groupListBlock {
+  float: left;
+  display: inline-block;
+  width: 35%;
+}
+
+/* TASK BLOCK
+   ================================================== */
+
+#taskListBlock {
+  float: left;
+  display: inline-block;
+  width: 64%;
+  margin-left: 1%;
+}
+
+ #taskListBlock li {
+   list-style: none;
+   display: block;
+ }
+
+ #taskListBlock .complete {
+   text-decoration: line-through;
+   opacity: 0.5;
+ }
+
+ #taskListBlock .incomplete {  text-decoration: none }
+
+/* STYLING TASK BLOCK
+   ================================================== */
+
+#taskListBlock {
+  border: 2px solid #4da6ea;
+  border-radius: 3px;
+}
+
+ #taskListBlock li a {
+   line-height: 35px;
+   min-height: 50px;
+   display: block;
+   border-bottom: 1px dashed #CCC;
+   background: #F7F7F7;
+   padding-left: 10px;
+ }
+
+ #taskListBlock li:last-child a {  border-bottom: none }
+
+ #taskListBlock li:nth-child(2n) a {  background: #EEEEEE }
+
+ #taskListBlock li img {
+   display: block;
+   width: 160px;
+   height: 120px;
+   float: left;
+   margin: 10px;
+   border: 2px solid #4da6ea;
+ }
+
+ #taskListBlock li {
+   position: relative;
+   clear: left;
+ }
+
+  #taskListBlock li .action {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -24px;
+    width: 48px;
+    height: 48px;
+    background: transparent url('../images/menu.png');
+  }
+
+ #taskListBlock p {
+   line-height: 15px;
+   font-weight: normal;
+   padding-bottom: 10px;
+   padding-right: 50px;
+   white-space: pre-wrap;
+ }
+
+/* STYLING GROUP BLOCK
+   ================================================== */
+
+#groupListBlock {
+  border: 2px solid #4da6ea;
+  border-radius: 3px;
+}
+
+ #groupListBlock li a h2, #groupListBlock li a p {  padding-right: 50px }
+
+ #groupListBlock li a h2 {  font-size: 1.3em }
+
+ #groupListBlock li a p {
+   padding-left: 20px;
+   font-weight: normal;
+   font-size: 0.8em;
+ }
+
+ #groupListBlock li {  position: relative }
+
+  #groupListBlock li .action {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -24px;
+    width: 48px;
+    height: 48px;
+    background: transparent url('../images/menu.png');
+  }
+
+ #groupListBlock .selected .action {  background: transparent url('../images/menu-white.png') }
+
+ #groupListBlock li a {
+   display: block;
+   min-height: 50px;
+   border-bottom: 1px dashed #CCC;
+   background: #FEFEFE;
+   font-size: 1.2em;
+   padding: 10px;
+ }
+
+ #groupListBlock li:last-child a {  border-bottom: none }
+
+ #groupListBlock li:nth-child(2n) a {  background: #EEEEEE }
+
+ #groupListBlock .selected a, #groupListBlock .selected:nth-child(2n)  a {
+   background: #4da6ea;
+   border: 2px solid #3388CC;
+   border-width: 2px 0 2px 20px;
+   color: #FFF;
+ }
+
+/* STYLING TOP BAR
+   ================================================== */
+
+#logo {  line-height: 50px }
+
+#topBarBlock > button {
+  height: 50px;
+  padding: 10px 20px;
+  margin-left: 15px;
+}
+
+/* NEW TASK FORM
+   ================================================== */
+
+.popup {
+  width: 540px;
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  margin-left: -250px;
+  border: 4px solid #4da6ea;
+  background: #EEEEEE;
+  padding: 10px;
+}
+
+ .popup label {
+   display: inline-block;
+   width: 200px;
+   border-bottom: 1px dotted #3388CC;
+   margin-right: 50px;
+   margin-bottom: 15px;
+   padding-left: 15px;
+ }
+
+ .popup input, .popup select, .popup textarea, .popup .select {
+   display: inline-block;
+   width: 240px;
+   margin: 0;
+   height: 30px;
+   border: none;
+   border: 1px solid #4da6ea;
+   padding-left: 5px;
+ }
+
+  .popup .select > button {
+    width: 100px;
+    height: 30px;
+  }
+
+ .popup .select {
+   border: none;
+   height: auto;
+ }
+
+ .popup textarea {
+   height: 50px;
+   resize: vertical;
+   max-height: 150px;
+ }
+
+ .popup .btn {
+   width: 150px;
+   border: 2px solid #4da6ea;
+   height: 40px;
+ }
+
+ .popup h2 {  margin-bottom: 15px }
+
+ .popup .form-btns {
+   width: 100%;
+   margin-top: 35px;
+   text-align: right;
+ }
+
+ .popup .warning {
+   display: inline-block;
+   width: 240px;
+   margin: 0;
+ }
