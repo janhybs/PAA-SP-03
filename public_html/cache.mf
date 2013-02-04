@@ -1,0 +1,17 @@
+CACHE MANIFEST 
+# 2013-04-02:v1
+
+/index.html
+
+/js/Chibi.js
+/js/Database.js
+/js/Drawing.js
+/js/Main.js
+
+/css/main.css
+/css/tablet.css
+/css/mobile.css
+
+/images/menu-gray_32x_32.png
+/images/menu-white.png
+/images/menu.png
