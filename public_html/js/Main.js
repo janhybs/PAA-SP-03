@@ -501,7 +501,7 @@
 
     Capabilities.isSupported = function (feature) {
 
-
+        //# go through entire array
         if (feature === undefined || feature === null) {
             for (var i = 0; i < features.length; i++) {
                 console.log (features[i] + ': ' + Capabilities.isSupported (features[i]));
@@ -523,6 +523,7 @@
     };
 
     Capabilities.fix = function (feature) {
+        //# show hide element
         if (!Capabilities.isSupported (feature)) {
             $ ('[data-require=' + feature + ']').hide ();
             $ ('[data-require=' + feature + '-placeholder]').show ();
